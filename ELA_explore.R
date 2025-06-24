@@ -16,7 +16,7 @@ library(pwr)
 ghat_birds <- read.csv("data/frequency-data.csv")
 
 #grabbing date from filename into new column "date" 
-#current ex:INOA03R_20201217_062000_40-50 
+#file currently looks like this INOA03R_20201217_062000_40-50 
 ghat_birds <- ghat_birds %>%
   mutate(date = str_extract(filename,"_\\d{8}_") %>%
            str_replace_all("_","") %>%
@@ -58,6 +58,7 @@ days_names <- ghat_birds %>%
 View(days_names)
 
 
+
 #Isolated important columns
 ghat_birds2 <- ghat_birds %>%
   distinct(common_name, date, recorder, hms2)
@@ -77,6 +78,8 @@ species_recorder_date <- ghat_birds2 %>%
   arrange(desc(unique_recorder_days))
 View(species_recorder_date)
 
+
+#factoring out migratory bird species 
 
 # One-way ANOVA, typical target p = 0.8/0.9, f = effect size
 pwr.anova.test(k = 30, f = .25, sig.level = 0.05, power = 0.8 )
