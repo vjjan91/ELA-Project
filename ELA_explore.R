@@ -12,9 +12,8 @@ library(mgcv)
 library(ggplot2)
 library(pwr)
 
-
 #read in the csv file 
-ghat_birds <- read.csv("/Users/alaynatrejo/downloads/frequency-data.csv")
+ghat_birds <- read.csv("data/frequency-data.csv")
 
 #grabbing date from filename into new column "date" 
 #current ex:INOA03R_20201217_062000_40-50 
@@ -23,7 +22,7 @@ ghat_birds <- ghat_birds %>%
            str_replace_all("_","") %>%
            ymd())
 
-#grabbing recorder
+#grabbing site_id
 ghat_birds <- ghat_birds %>%
   mutate(recorder = str_extract(filename,"^[^_]+"))
 
